@@ -19,23 +19,24 @@ namespace Texter
         public IConfigurationRoot Configuration { get; set; }
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder();
-                //.SetBasePath(env.ContentRootPath);
-                //.AddJsonFile("appsettings.json");
-            //Configuration = builder.Build();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
         }
        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddEntityFramework();
-               //.AddDbContext<ToDoDbContext>(options =>
-               //    options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddEntityFramework()
+               .AddDbContext<ApplicationDbContext>(options =>
+                   options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+       
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

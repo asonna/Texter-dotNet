@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Texter - Contact List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Texter.Models.Contact
+
+<h2>Contact List</h2>
+@foreach (var contact in ViewBag.Contacts)
+{
+    <div>
+        <p> @contact.Name | @contact.Phone </p>
+    </div><br />
+}
+<hr />

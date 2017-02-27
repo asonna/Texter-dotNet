@@ -9,6 +9,7 @@ namespace Texter.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public IActionResult Index()
         {
@@ -32,7 +33,23 @@ namespace Texter.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult  CreateContact()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult CreateContact(Contact newContact)
+        {
+            db.Contacts.Add(newContact);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
+        public IActionResult ContactList()
+        {
+            ViewBag.Contacts = db.Contacts.ToList();
+            return View();
+        }
     }
 }
