@@ -21,10 +21,18 @@ namespace Texter.Controllers
             return View(allMessages);
         }
 
-        public IActionResult SendMessage()
+        //public IActionResult SendMessage()
+        //{
+        //    return View();
+        //}
+        //[ActionName("SendMessage")]
+        public IActionResult SendMessage(int id)
         {
+            var thisContact = db.Contacts.FirstOrDefault(c => c.ContactId == id);
+            ViewBag.Contact = thisContact;
             return View();
         }
+
 
         [HttpPost]
         public IActionResult SendMessage(Message newMessage)
@@ -48,8 +56,8 @@ namespace Texter.Controllers
 
         public IActionResult ContactList()
         {
-            ViewBag.Contacts = db.Contacts.ToList();
-            return View();
+            //ViewBag.Contacts = db.Contacts.ToList();
+            return View(db.Contacts.ToList());
         }
     }
 }

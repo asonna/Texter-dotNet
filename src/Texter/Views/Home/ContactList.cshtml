@@ -3,13 +3,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model Texter.Models.Contact
+@model IEnumerable<Texter.Models.Contact>
 
 <h2>Contact List</h2>
-@foreach (var contact in ViewBag.Contacts)
+@foreach (var contact in Model)
 {
-    <div>
-        <p> @contact.Name | @contact.Phone </p>
-    </div><br />
+    <hr /><div>
+            <form>
+                <p> @contact.Name | @contact.Phone </p>
+                <button class="">@Html.ActionLink("Message contact!", "SendMessage", new {id = @contact.ContactId })</button>
+            </form>
+    </div>
+
 }
-<hr />
+<hr /><br />
+
+@Html.ActionLink("Homepage", "Index")  |  @Html.ActionLink("Create a New Contact", "CreateContact")

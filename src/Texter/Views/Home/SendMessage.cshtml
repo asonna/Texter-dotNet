@@ -8,16 +8,21 @@
 <h2>Send a new message</h2>
 <hr />
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.To)
-    @Html.TextBoxFor(model => model.To)
-    @Html.LabelFor(model => model.From)
-    @Html.TextBoxFor(model => model.From)
-    @Html.LabelFor(model => model.Body)
-    @Html.TextBoxFor(model => model.Body)
-    <input type="submit" value="Send!" />
-}
+<form method="post" asp-action="SendMessage">
+    <label for="to">To: ViewBag.Contact.Name </label>
+    <input type="text" id="to" name="to" value=ViewBag.Contact />
 
-@Html.ActionLink("Back home", "Index")
+    <label for="from">From: </label>
+    <input type="text" id="from" name="from"  />
+
+    <label for="body">Body: </label>
+    <input type="text" id="body" name="body"  />
+
+    <input type="hidden" id="status" name="status"/>
+
+    <button class="btn waves-effect" type="submit">Create</button>
+</form>
+
+
+
 

@@ -11,11 +11,28 @@ namespace Texter.Models
 {
     public class Message
     {
+        public Message(string to, string from, string body, string status)
+        {
+            To = to;
+            From = from;
+            Body = body;
+            Status = status;
+        }
+
+        public Message()
+        {
+
+        }
+
         public string To { get; set; }
         public string From { get; set; }
         public string Body { get; set; }
         public string Status { get; set; }
 
+
+
+
+        
         public static List<Message> GetMessages()
         {
             var client = new RestClient("https://api.twilio.com/2010-04-01");
